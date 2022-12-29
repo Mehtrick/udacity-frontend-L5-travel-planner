@@ -7,26 +7,27 @@ dotenv.config();
 
 
 const pixabayApiUrl = "https://pixabay.com/api/";
-const pixabayApiKey =  process.env.APP_PIXABAY_API_KEY;
+const pixabayApiKey = process.env.APP_PIXABAY_API_KEY;
+
+
+async function searchImageByDestination(destination) {
+    let nameSearchResult = await searchImageByName(destination.name);
+    if(!nameSearchResult){
+        nameSearchResult = await searchImageByName(destination.country);
+    }
+    return nameSearchResult.webformatURL;
+}
+
 
 async function searchImageByName(name) {
     const encodedName = encodeURIComponent(name);
-    return await fetch(`${pixabayApiUrl}searchJSON?q=${encodedName}&key=${pixabayApiKey}`)
-        .then(res => res.json())
+    console.log("search", encodedName);
+    return await fetch(`${pixabayApiUrl}?q=${encodedName}&orientation=horizontal&per_page=3&key=${pixabayApiKey}`)
+        .then(res => {
+            return res.json();
+        })
         .then(j => {
-            if (j.geonames.length === 0) {
-                return {
-                    err: "Destination not found. Try another.",
-                    status: 404
-                };
-            }
-            const e = j.geonames[0];
-            return {
-                name: e.name,
-                lat: e.lat,
-                lng: e.lng,
-                countryCode: e.countryCode
-            };
+            return j.hits[0];
         }).catch(error => {
             console.log(error);
             return {
@@ -37,5 +38,5 @@ async function searchImageByName(name) {
 }
 
 export {
-    searchByName
+    searchImageByDestination
 };

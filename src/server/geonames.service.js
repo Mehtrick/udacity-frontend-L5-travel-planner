@@ -19,7 +19,8 @@ async function searchByName(name) {
                 name: e.name,
                 lat: e.lat,
                 lng: e.lng,
-                countryCode: e.countryCode
+                countryCode: e.countryCode,
+                country: e.countryName
             };
         }).catch(error => {
             console.log(error);

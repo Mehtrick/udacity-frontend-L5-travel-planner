@@ -5,6 +5,7 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import {searchByName} from "./geonames.service.js";
 import {getWeather} from "./weatherbit.service.js";
+import {searchImageByDestination} from "./pixabay.service.js";
 
 dotenv.config();
 const app = express();
@@ -46,6 +47,7 @@ app.get("/destination/search", async function (req, res) {
         return;
     }
     foundDestination.weather = weather;
+    foundDestination.image = await searchImageByDestination(foundDestination);
     res.send(foundDestination);
 
 
