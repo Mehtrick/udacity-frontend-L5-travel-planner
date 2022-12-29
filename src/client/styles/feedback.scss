@@ -1,0 +1,23 @@
+@import "base";
+
+
+.feedback-panel {
+  width: 100%;
+}
+
+.feedback {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: start;
+}
+
+.message {
+  margin-left: 5px;
+}
+
+#alert {
+  padding: 20px;
+  background-color: $error-color;
+  color: white;
+}

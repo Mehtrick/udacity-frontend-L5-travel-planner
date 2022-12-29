@@ -4,35 +4,44 @@
     <meta charset="UTF-8">
     <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" name="viewport">
     <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" rel="stylesheet">
     <title>My Travel App</title>
 </head>
 <body>
     <header>
         <h1>
-            Travleluna
+            Loona
         </h1>
     </header>
     <main>
-        <div class="overlay">
+        <div class="overlay hidden" id="loader">
             <div class="overlay__inner">
                 <div class="overlay__content"><span class="spinner"></span></div>
             </div>
         </div>
+        <div class="feedback-panel">
+            <div id="alert" class="feedback hidden">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <div id="alert-message" class="message">
+                    Indicates a dangerous or potentially negative action.
+                </div>
+            </div>
+        </div>
         <div class="container">
-            <form>
+            <form onsubmit="Client.searchNewDestination()">
                 <h3>
                     Where would you like to go?
                 </h3>
                 <label for="destination">Destination</label>
-                <input id="destination" name="destination" placeholder="Your dream destination..." type="text">
+                <input id="destination" name="destination" placeholder="Your dream destination..." required type="text">
                 <div class="period-container">
                     <div>
                         <label for="start">Start</label>
-                        <input id="start" name="start" placeholder="Your start..." type="date">
+                        <input id="start" name="start" placeholder="Your start..." required type="date">
                     </div>
                     <div>
                         <label for="end">End</label>
-                        <input id="end" name="end" placeholder="Your end..." type="date">
+                        <input id="end" name="end" placeholder="Your end..." required type="date">
                     </div>
                 </div>
                 <button type="submit">

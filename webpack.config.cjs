@@ -29,6 +29,8 @@ module.exports = {
         extensions: ["*", ".js"]
     },
     output: {
+        libraryTarget: "var",
+        library: "Client",
         path: path.resolve(__dirname, "./dist"),
         filename: "bundle.js",
         clean: true,
@@ -42,6 +44,6 @@ module.exports = {
             template: "./src/client/views/index.html",
             filename: "./index.html",
         }),
-        new ESLintPlugin()
+        new ESLintPlugin(),
     ],
 };
