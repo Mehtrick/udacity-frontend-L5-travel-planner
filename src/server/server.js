@@ -40,7 +40,7 @@ app.get("/destination/search", async function (req, res) {
         res.status(foundDestination.status).end();
         return;
     }
-    const weather = await getWeather(foundDestination, req.query.start);
+    const weather = await getWeather(foundDestination, req.query.date);
     if (weather.err) {
         res.statusMessage = weather.err;
         res.status(weather.status).end();

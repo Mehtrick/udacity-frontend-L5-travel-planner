@@ -6,9 +6,8 @@ function searchNewDestination() {
     activateLoading();
     hideFeedback();
     const destination = document.getElementById("destination").value;
-    const start = document.getElementById("start").value;
-    const end = document.getElementById("end").value;
-    fetch(`http://localhost:8081/destination/search?destination=${destination}&start=${start}&end=${end} `)
+    const date = document.getElementById("date").value;
+    fetch(`http://localhost:8081/destination/search?destination=${destination}&date=${date} `)
         .then(r => {
             if (!r.ok) {
                 throw Error(r.statusText);

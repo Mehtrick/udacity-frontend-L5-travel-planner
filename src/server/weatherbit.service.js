@@ -14,8 +14,7 @@ async function getWeather(destination, date) {
     const today = new Date();
     const maxForecastDate = today.setDate(today.getDate() + 16);
 
-
-    if (searchDate > maxForecastDate || searchDate< today) {
+    if (searchDate.getTime() > maxForecastDate || searchDate.getTime()<  new Date().getTime()) {
         return getAverageWeather(destination, date);
     } else {
         return getWeatherForecast(destination, date);
@@ -27,7 +26,6 @@ async function getWeatherForecast(destination, date) {
     return await fetch(`${weatherbitApiURL}//forecast/daily?lat=${destination.lat}&lon=${destination.lng}&key=${weatherbitApiKey}`)
         .then(res => res.json())
         .then(j => {
-                console.log(j);
                 const weatherOfDate = j.data.filter(f => f.datetime === date)[0];
                 return {
                     temp: weatherOfDate.temp,
@@ -40,7 +38,7 @@ async function getWeatherForecast(destination, date) {
                 };
             }
         ).catch(error => {
-            console.log(error);
+            console.log("error:",error);
             return {
                 err: "Something went wrong. Contact administrator.",
                 status: 500
