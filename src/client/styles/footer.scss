@@ -1,0 +1,10 @@
+@import "base";
+
+footer {
+  background-color: $background-color;
+  border-top: solid #5e565a;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

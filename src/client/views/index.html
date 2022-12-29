@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <title>My Travel App</title>
+</head>
+<body>
+    <header>
+        <h1>
+            Travleluna
+        </h1>
+    </header>
+    <main>
+        <div class="overlay">
+            <div class="overlay__inner">
+                <div class="overlay__content"><span class="spinner"></span></div>
+            </div>
+        </div>
+        <div class="container">
+            <form>
+                <h3>
+                    Where would you like to go?
+                </h3>
+                <label for="destination">Destination</label>
+                <input id="destination" name="destination" placeholder="Your dream destination..." type="text">
+                <div class="period-container">
+                    <div>
+                        <label for="start">Start</label>
+                        <input id="start" name="start" placeholder="Your start..." type="date">
+                    </div>
+                    <div>
+                        <label for="end">End</label>
+                        <input id="end" name="end" placeholder="Your end..." type="date">
+                    </div>
+                </div>
+                <button type="submit">
+                    Search
+                </button>
+
+            </form>
+        </div>
+    </main>
+    <footer>
+        <p>This app is build by Mehtrick</p>
+    </footer>
+</body>
+</html>

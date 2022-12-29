@@ -1,14 +1,12 @@
-
 const path = require("path");
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ESLintPlugin = require("eslint-webpack-plugin");
 
 
-
-
 module.exports = {
     mode: "development",
+    stats: "errors-warnings",
     entry: path.resolve(__dirname, "./src/client/index.js"),
     module: {
         rules: [
@@ -16,7 +14,15 @@ module.exports = {
                 test: /\.(js)$/,
                 exclude: /node_modules/,
                 use: ["babel-loader"]
-            }
+            },
+            {
+                test: /\.s[ac]ss$/i,
+                use: [
+                    "style-loader",
+                    "css-loader",
+                    "sass-loader",
+                ],
+            },
         ]
     },
     resolve: {
@@ -29,6 +35,7 @@ module.exports = {
     },
     devServer: {
         static: path.resolve(__dirname, "./dist"),
+        watchFiles: ["src/client/views/**"]
     },
     plugins: [
         new HtmlWebpackPlugin({
