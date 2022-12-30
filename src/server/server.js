@@ -27,14 +27,12 @@ app.listen(port, () => {
     console.log(`Travel App listening on port ${port}`);
 });
 
-const destinationDB = [];
+const tripDB = [];
 
 app.get("/", function (req, res) {
     res.sendFile(path.resolve("dist/index.html"));
 });
-app.get("/destination/search", async function (req, res) {
-    console.log("info: search destinations", req.query);
-
+app.get("/trip/search", async function (req, res) {
     const foundDestination = await searchByName(req.query.destination).then();
     if (foundDestination.err) {
         res.statusMessage = foundDestination.err;
@@ -53,21 +51,21 @@ app.get("/destination/search", async function (req, res) {
     res.send(foundDestination);
 });
 
-app.post("/destination",  function (req, res) {
+app.post("/trip",  function (req, res) {
     req.body.id = randomId();
-    destinationDB.push(req.body);
-    destinationDB.sort(function (a,b) {
+    tripDB.push(req.body);
+    tripDB.sort(function (a,b) {
         return new Date(b.date) - new Date(a.date);
     }).reverse();
     res.send(req.body);
 });
 
-app.delete("/destination",  function (req, res) {
+app.delete("/trip",  function (req, res) {
     const id = req.query.id;
-    const elementToDelete = destinationDB.find(x => x.id === id);
-    const index = destinationDB.indexOf(elementToDelete);
+    const elementToDelete = tripDB.find(x => x.id === id);
+    const index = tripDB.indexOf(elementToDelete);
     if (index > -1) { // only splice array when item is found
-        destinationDB.splice(index, 1); // 2nd parameter means remove one item only
+        tripDB.splice(index, 1); // 2nd parameter means remove one item only
     }
     res.send();
 });
@@ -77,7 +75,6 @@ function randomId(){
 }
 
 
-app.get("/destination", function (req, res) {
-    console.log("info: get destination");
-    res.send(destinationDB);
+app.get("/trip", function (req, res) {
+    res.send(tripDB);
 });

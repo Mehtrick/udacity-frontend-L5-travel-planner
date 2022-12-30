@@ -1,7 +1,7 @@
 import {showFeedback} from "./feedback.js";
 const baseURL = "http://192.168.178.23:8081";
 async function loadTravelBookEntries() {
-    return  await fetch(`${baseURL}/destination`)
+    return  await fetch(`${baseURL}/trip`)
         .then(r => {
             if (!r.ok) {
                 throw Error(r.statusText);
@@ -13,7 +13,7 @@ async function loadTravelBookEntries() {
 }
 
 async function searchDestination(destination,date){
-    return fetch(`${baseURL}/destination/search?destination=${destination}&date=${date} `)
+    return fetch(`${baseURL}/trip/search?destination=${destination}&date=${date} `)
         .then(r => {
             if (!r.ok) {
                 throw Error(r.statusText);
@@ -24,7 +24,7 @@ async function searchDestination(destination,date){
         .catch(error => showFeedback("alert", error));
 }
 async function saveDestinationToEntries(currentTravelEntryPreview){
-    return fetch(`${baseURL}/destination`, {
+    return fetch(`${baseURL}/trip`, {
         method: "POST",
         credentials: "same-origin",
         headers: {
@@ -35,7 +35,7 @@ async function saveDestinationToEntries(currentTravelEntryPreview){
 }
 
 async function deleteTravelBookEntry(id){
-    return fetch(`${baseURL}/destination?id=${id}`, {
+    return fetch(`${baseURL}/trip?id=${id}`, {
         method: "DELETE",
         credentials: "same-origin",
     });

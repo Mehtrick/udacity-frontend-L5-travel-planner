@@ -1,6 +1,6 @@
 import {activateLoading, deactivateLoading} from "./loading.js";
 import {hideFeedback, showFeedback} from "./feedback.js";
-import {loadAndRenderTravelbookEntries, renderTravelEntry} from "./travelentry.js";
+import {loadAndRenderTravelbookEntries, renderTravelEntry} from "./tripentry.js";
 import {saveDestinationToEntries, searchDestination} from "./api.js";
 
 
@@ -12,12 +12,12 @@ function renderTravelEntryPreview(destination) {
     currentTravelEntryPreview = destination;
     const footerContent = `
                 <button class="error outlined" onclick="Client.deleteDestinationSearch()">
-                <i class="fa-solid fa-trash" ></i>
+                <i class="fa-solid fa-ban"></i>
                     Cancel
                 </button>
                 <button onclick="Client.saveDestination()">
                 <i class="fa-solid fa-plus"></i>
-                    Add to your journeys
+                    Add to your trips
                 </button>
     `;
     renderTravelEntry(destination, container, footerContent);
@@ -45,7 +45,7 @@ function deleteDestinationSearch() {
 async function saveDestination() {
     activateLoading();
     await saveDestinationToEntries(currentTravelEntryPreview);
-    showFeedback("success", `${currentTravelEntryPreview.name} <br> was added to your travel-book`);
+    showFeedback("success", `${currentTravelEntryPreview.name} <br> was added to your upcoming trips`);
     deleteDestinationSearch();
     await loadAndRenderTravelbookEntries();
     deactivateLoading();

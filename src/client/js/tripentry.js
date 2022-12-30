@@ -11,6 +11,7 @@ function renderTravelEntry(destination, container, footerContent) {
     if(!destination.id){
         travelEntryDiv.classList.add("preview");
     }
+    travelEntryDiv.classList.add("trip-card");
     travelEntryDiv.id = destination.id ? destination.id : "destination-preview";
     travelEntryDiv.innerHTML = `
             <img alt="${destination.name}" class="card-image"
@@ -68,10 +69,10 @@ async function loadAndRenderTravelbookEntries() {
     activateLoading();
     const travelEntries = await loadTravelBookEntries();
     const container = document.getElementById("travel-entries");
-    container.innerHTML = "<h3>Your upcoming journeys</h3>";
+    container.innerHTML = "<h3>Your upcoming trips</h3>";
     for (const travelEntry of travelEntries) {
         const footerContent = `
-                <button class="error outlined" onclick="Client.deleteTravelEntry(${travelEntry.id})">
+                <button class="error outlined" onclick="Client.deleteTravelEntry('${travelEntry.id}')">
                 <i class="fa-solid fa-trash" ></i>
                     Delete
                 </button>
@@ -82,9 +83,8 @@ async function loadAndRenderTravelbookEntries() {
     window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-async function deleteTravelEntry(element){
+async function deleteTravelEntry(id){
     activateLoading();
-    const id = element.attributes.id.value;
     await deleteTravelBookEntry(id);
     await loadAndRenderTravelbookEntries();
     showFeedback("success", "Trip successfully deleted");

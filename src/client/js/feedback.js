@@ -1,6 +1,7 @@
 function showFeedback(type, message) {
     document.getElementById(type).classList.remove("hidden");
     document.getElementById(`${type}-message`).innerHTML = message;
+    setTimeout(hideFeedback, 5000);
 }
 
 function hideFeedback(){

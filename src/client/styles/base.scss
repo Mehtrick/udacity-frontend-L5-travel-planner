@@ -37,7 +37,6 @@ label{
 
 .container {
   width: 100%;
-  max-width: 600px;
   display: flex;
   flex-direction: column;
 }
@@ -84,6 +83,7 @@ input {
   box-sizing: border-box;
   font-family: $font-family;
   font-size: 1em;
+  height: 45px;
 }
 
 button {

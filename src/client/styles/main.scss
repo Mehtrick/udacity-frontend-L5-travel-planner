@@ -11,11 +11,13 @@ main{
 h3{
   text-align: center;
 }
-.period-container{
+.destination-search-form-inputs{
   display: flex;
   flex-direction: column;
 }
-
+.form-input{
+  width: 100%;
+}
 .weather{
   display: flex;
   flex-direction: column;
@@ -59,4 +61,65 @@ h3{
 
 .preview{
   background-color: $third-color;
+}
+
+.trip-card{
+
+}
+
+@media only screen
+and (max-width: 1201px) {
+  .container{
+    max-width: 600px;
+  }
+}
+
+@media only screen
+and (min-width: 1201px) {
+
+  .destination-search-form-inputs{
+    flex-direction: row;
+  }
+
+  .container{
+    max-width: 800px;
+  }
+
+  .trip-card{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-areas:
+    "cimg cimg cct cct"
+    "cft cft cft cft"
+  }
+
+  .card-image{
+    grid-area: cimg;
+  }
+  .card-content{
+    grid-area: cct;
+  }
+
+  .card-footer{
+    grid-area: cft;
+    flex-direction: row !important;
+    justify-content: end !important;
+  }
+
+  .form-actions{
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+  }
+
+  .form-input{
+    margin: 5px;
+  }
+
+
+  button{
+    width: auto !important;
+    margin: 5px !important;
+  }
+
 }
