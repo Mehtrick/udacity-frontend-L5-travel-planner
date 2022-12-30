@@ -68,11 +68,11 @@ function calculateDaysUntilTrip(date) {
 async function loadAndRenderTripEntries() {
     activateLoading();
     const tripEntries = await getTripEntries();
-    const container = document.getElementById("travel-entries");
+    const container = document.getElementById("trip-entries");
     container.innerHTML = "<h3>Your upcoming trips</h3>";
     for (const tripEntry of tripEntries) {
         const footerContent = `
-                <button class="error outlined" onclick="Client.deleteTravelEntry('${tripEntry.id}')">
+                <button class="error outlined" onclick="Client.deleteTripEntry('${tripEntry.id}')">
                 <i class="fa-solid fa-trash" ></i>
                     Delete
                 </button>
@@ -83,7 +83,7 @@ async function loadAndRenderTripEntries() {
     window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-async function deleteTravelEntry(id){
+async function deleteTripEntry(id){
     activateLoading();
     await deleteTravelBookEntry(id);
     await loadAndRenderTripEntries();
@@ -94,7 +94,7 @@ async function deleteTravelEntry(id){
 
 
 export {
-    deleteTravelEntry,
+    deleteTripEntry,
     renderTripEntry,
     loadAndRenderTripEntries
 };

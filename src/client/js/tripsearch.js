@@ -11,11 +11,11 @@ function renderTripEntryPreview(trip) {
     container.innerHTML = "<h3>Preview of you next adventure</h3>";
     currentTripEntryPreview = trip;
     const footerContent = `
-                <button class="error outlined" onclick="Client.deleteDestinationSearch()">
+                <button class="error outlined" onclick="Client.cancelTripSearch()">
                 <i class="fa-solid fa-ban"></i>
                     Cancel
                 </button>
-                <button onclick="Client.saveDestination()">
+                <button onclick="Client.saveTripAndReload()">
                 <i class="fa-solid fa-plus"></i>
                     Add to your trips
                 </button>
