@@ -54,11 +54,28 @@ app.get("/destination/search", async function (req, res) {
 });
 
 app.post("/destination",  function (req, res) {
-    req.body.id = (Math.random() + 1).toString(36);
+    req.body.id = randomId();
     destinationDB.push(req.body);
-    console.log("size of db",destinationDB.length);
+    destinationDB.sort(function (a,b) {
+        return new Date(b.date) - new Date(a.date);
+    }).reverse();
     res.send(req.body);
 });
+
+app.delete("/destination",  function (req, res) {
+    const id = req.query.id;
+    const elementToDelete = destinationDB.find(x => x.id === id);
+    const index = destinationDB.indexOf(elementToDelete);
+    if (index > -1) { // only splice array when item is found
+        destinationDB.splice(index, 1); // 2nd parameter means remove one item only
+    }
+    res.send();
+});
+
+function randomId(){
+    return Math.random().toString(36).substring(2,10);
+}
+
 
 app.get("/destination", function (req, res) {
     console.log("info: get destination");

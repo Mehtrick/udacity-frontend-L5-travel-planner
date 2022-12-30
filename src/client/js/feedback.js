@@ -1,6 +1,6 @@
 function showFeedback(type, message) {
     document.getElementById(type).classList.remove("hidden");
-    document.getElementById(`${type}-message`).innerText = message;
+    document.getElementById(`${type}-message`).innerHTML = message;
 }
 
 function hideFeedback(){

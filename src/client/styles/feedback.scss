@@ -3,6 +3,7 @@
 
 .feedback-panel {
   width: 100%;
+  justify-content: center;
 }
 
 .feedback {
@@ -17,6 +18,8 @@
 
 .message {
   margin-left: 5px;
+  text-align: center;
+  width: 100%;
 }
 
 #alert {
