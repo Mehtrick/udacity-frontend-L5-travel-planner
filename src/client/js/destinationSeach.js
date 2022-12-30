@@ -116,7 +116,7 @@ async function saveDestination() {
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify(currentTravelEntryPreview), // body data type must match "Content-Type" header
+        body: JSON.stringify(currentTravelEntryPreview),
     }).finally(deactivateLoading);
     showFeedback("success", `${currentTravelEntryPreview.name} was added to your travel-book`);
     deleteDestinationSearch();
