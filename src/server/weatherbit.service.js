@@ -22,8 +22,8 @@ async function getWeather(destination, date) {
 }
 
 
-async function getWeatherForecast(destination, date) {
-    return await fetch(`${weatherbitApiURL}/forecast/daily?lat=${destination.lat}&lon=${destination.lng}&key=${weatherbitApiKey}`)
+async function getWeatherForecast(trip, date) {
+    return await fetch(`${weatherbitApiURL}/forecast/daily?lat=${trip.lat}&lon=${trip.lng}&key=${weatherbitApiKey}`)
         .then(res => res.json())
         .then(j => {
                 const weatherOfDate = j.data.filter(f => f.datetime === date)[0];
@@ -48,14 +48,14 @@ async function getWeatherForecast(destination, date) {
 }
 
 
-async function getAverageWeather(destination, date) {
+async function getAverageWeather(trip, date) {
     const jsDate = new Date(date);
     let month = (1 + jsDate.getMonth()).toString();
     month = month.length > 1 ? month : "0" + month;
     let dayOfMonth = jsDate.getDate().toString();
     dayOfMonth = dayOfMonth.length > 1 ? dayOfMonth : "0" + dayOfMonth;
     const day = `${month}-${dayOfMonth}`;
-    return await fetch(`${weatherbitApiURL}/normals?lat=${destination.lat}&lon=${destination.lng}&start_day=${day}&end_day=${day}&key=${weatherbitApiKey}`)
+    return await fetch(`${weatherbitApiURL}/normals?lat=${trip.lat}&lon=${trip.lng}&start_day=${day}&end_day=${day}&key=${weatherbitApiKey}`)
         .then(res => res.json())
         .then(j => {
             const data = j.data[0];

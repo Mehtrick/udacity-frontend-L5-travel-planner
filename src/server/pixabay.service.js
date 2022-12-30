@@ -10,10 +10,10 @@ const pixabayApiUrl = "https://pixabay.com/api/";
 const pixabayApiKey = process.env.APP_PIXABAY_API_KEY;
 
 
-async function searchImageByDestination(destination) {
-    let nameSearchResult = await searchImageByName(destination.name);
+async function searchImageByDestination(trip) {
+    let nameSearchResult = await searchImageByName(trip.name);
     if(!nameSearchResult){
-        nameSearchResult = await searchImageByName(destination.country);
+        nameSearchResult = await searchImageByName(trip.country);
     }
     return nameSearchResult.webformatURL;
 }

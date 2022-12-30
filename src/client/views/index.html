@@ -22,23 +22,23 @@
         <div class="feedback-panel container" id="feedbackpanel">
             <div class="feedback hidden" id="alert">
                 <i class="fa-solid fa-triangle-exclamation"></i>
-                <div class="message" id="alert-message">
+                <div class="feedback-message" id="alert-message">
                     Indicates a dangerous or potentially negative action.
                 </div>
             </div>
             <div class="feedback hidden" id="success">
                 <i class="fa-solid fa-check"></i>
-                <div class="message" id="success-message">
+                <div class="feedback-message" id="success-message">
                     Indicates a dangerous or potentially negative action.
                 </div>
             </div>
         </div>
-        <div class="container" id="destination-search">
+        <div class="container" id="trip-search">
             <form onsubmit="Client.searchNewDestination()">
                 <h3>
                     Where would you like to go next?
                 </h3>
-                <div class="destination-search-form-inputs">
+                <div class="trip-search-form-inputs">
                     <div class="form-input">
                         <label for="destination">Destination</label>
                         <input id="destination" name="destination" placeholder="Your dream destination..." required type="text">
@@ -57,10 +57,10 @@
                 </div>
             </form>
         </div>
-        <section class="container" id="new-destination">
+        <section class="container" id="new-trip">
 
         </section>
-        <section class="container" id="travel-entries">
+        <section class="container" id="trip-entries">
 
         </section>
     </main>

@@ -11,7 +11,7 @@ main{
 h3{
   text-align: center;
 }
-.destination-search-form-inputs{
+.trip-search-form-inputs{
   display: flex;
   flex-direction: column;
 }
@@ -41,7 +41,7 @@ h3{
   align-items: center;
 }
 
-#destination-search{
+#trip-search{
   margin-top: 20px;
   margin-bottom: 20px;
 }
@@ -77,7 +77,7 @@ and (max-width: 1201px) {
 @media only screen
 and (min-width: 1201px) {
 
-  .destination-search-form-inputs{
+  .trip-search-form-inputs{
     flex-direction: row;
   }
 

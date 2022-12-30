@@ -1,15 +1,15 @@
 import {activateLoading, deactivateLoading} from "./loading.js";
 import {hideFeedback, showFeedback} from "./feedback.js";
-import {loadAndRenderTravelbookEntries, renderTravelEntry} from "./tripentry.js";
-import {saveDestinationToEntries, searchDestination} from "./api.js";
+import {loadAndRenderTripEntries, renderTripEntry} from "./tripentry.js";
+import {saveTrip, searchTrip} from "./api.js";
 
 
-let currentTravelEntryPreview = {};
+let currentTripEntryPreview = {};
 
-function renderTravelEntryPreview(destination) {
-    const container = document.getElementById("new-destination");
+function renderTripEntryPreview(trip) {
+    const container = document.getElementById("new-trip");
     container.innerHTML = "<h3>Preview of you next adventure</h3>";
-    currentTravelEntryPreview = destination;
+    currentTripEntryPreview = trip;
     const footerContent = `
                 <button class="error outlined" onclick="Client.deleteDestinationSearch()">
                 <i class="fa-solid fa-ban"></i>
@@ -20,40 +20,40 @@ function renderTravelEntryPreview(destination) {
                     Add to your trips
                 </button>
     `;
-    renderTravelEntry(destination, container, footerContent);
+    renderTripEntry(trip, container, footerContent);
 }
 
-async function searchNewDestination() {
+async function searchNewTrip() {
     event.preventDefault();
     activateLoading();
     hideFeedback();
     const destination = document.getElementById("destination").value;
     const date = document.getElementById("searchdate").value;
-    const newDestination = await searchDestination(destination, date);
-    if (newDestination) {
-        renderTravelEntryPreview(newDestination);
+    const newTrip = await searchTrip(destination, date);
+    if (newTrip) {
+        renderTripEntryPreview(newTrip);
     }
     deactivateLoading();
 }
 
-function deleteDestinationSearch() {
-    currentTravelEntryPreview = {};
-    const container = document.getElementById("new-destination");
+function cancelTripSearch() {
+    currentTripEntryPreview = {};
+    const container = document.getElementById("new-trip");
     container.innerHTML = "";
 }
 
-async function saveDestination() {
+async function saveTripAndReload() {
     activateLoading();
-    await saveDestinationToEntries(currentTravelEntryPreview);
-    showFeedback("success", `${currentTravelEntryPreview.name} <br> was added to your upcoming trips`);
-    deleteDestinationSearch();
-    await loadAndRenderTravelbookEntries();
+    await saveTrip(currentTripEntryPreview);
+    showFeedback("success", `${currentTripEntryPreview.name} <br> was added to your upcoming trips`);
+    cancelTripSearch();
+    await loadAndRenderTripEntries();
     deactivateLoading();
 }
 
 
 export {
-    deleteDestinationSearch,
-    searchNewDestination,
-    saveDestination,
+    cancelTripSearch,
+    searchNewTrip,
+    saveTripAndReload,
 };

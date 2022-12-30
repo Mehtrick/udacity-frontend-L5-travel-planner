@@ -1,12 +1,12 @@
-import {deleteDestinationSearch, saveDestination, searchNewDestination} from "./js/tripsearch.js";
+import {cancelTripSearch, saveTripAndReload, searchNewTrip} from "./js/tripsearch.js";
 import "./styles/index.scss";
-import {loadAndRenderTravelbookEntries,deleteTravelEntry} from "./js/tripentry.js";
+import {loadAndRenderTripEntries,deleteTravelEntry} from "./js/tripentry.js";
 
 document.getElementById("searchdate").setAttribute("min", new Date().toISOString().split("T")[0]);
-loadAndRenderTravelbookEntries();
+loadAndRenderTripEntries();
 export {
-    deleteDestinationSearch,
-    searchNewDestination,
-    saveDestination,
+    cancelTripSearch,
+    searchNewTrip,
+    saveTripAndReload,
     deleteTravelEntry
 };
