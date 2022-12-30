@@ -13,3 +13,12 @@ $font-family: "native font stack", sans-serif;
 .accent{
   color: $accent-color;
 }
+
+.error{
+  color: $error-color;
+}
+
+.outlined{
+  background-color: white;
+  border: solid 1px;
+}
