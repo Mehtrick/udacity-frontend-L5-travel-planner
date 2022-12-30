@@ -23,7 +23,7 @@ async function getWeather(destination, date) {
 
 
 async function getWeatherForecast(destination, date) {
-    return await fetch(`${weatherbitApiURL}//forecast/daily?lat=${destination.lat}&lon=${destination.lng}&key=${weatherbitApiKey}`)
+    return await fetch(`${weatherbitApiURL}/forecast/daily?lat=${destination.lat}&lon=${destination.lng}&key=${weatherbitApiKey}`)
         .then(res => res.json())
         .then(j => {
                 const weatherOfDate = j.data.filter(f => f.datetime === date)[0];
@@ -34,6 +34,7 @@ async function getWeatherForecast(destination, date) {
                     precip: weatherOfDate.precip,
                     snow: weatherOfDate.snow,
                     icon: weatherOfDate.weather,
+                    pop: weatherOfDate.pop,
                     type: "forecast"
                 };
             }
@@ -64,6 +65,8 @@ async function getAverageWeather(destination, date) {
                 min_temp: data.min_temp,
                 max_temp: data.max_temp,
                 snow: data.snow,
+                pop: data.pop,
+                icon: {icon: "c02d"},
                 type: "historical"
             };
         }).catch(error => {

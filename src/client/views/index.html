@@ -19,29 +19,41 @@
                 <div class="overlay__content"><span class="spinner"></span></div>
             </div>
         </div>
-        <div class="feedback-panel">
+        <div class="feedback-panel container" id="feedbackpanel">
             <div class="feedback hidden" id="alert">
                 <i class="fa-solid fa-triangle-exclamation"></i>
                 <div class="message" id="alert-message">
                     Indicates a dangerous or potentially negative action.
                 </div>
             </div>
+            <div class="feedback hidden" id="success">
+                <i class="fa-solid fa-check"></i>
+                <div class="message" id="success-message">
+                    Indicates a dangerous or potentially negative action.
+                </div>
+            </div>
         </div>
-        <div class="container">
+        <div class="container" id="destination-search">
             <form onsubmit="Client.searchNewDestination()">
                 <h3>
-                    Where would you like to go?
+                    Where would you like to go next?
                 </h3>
                 <label for="destination">Destination</label>
                 <input id="destination" name="destination" placeholder="Your dream destination..." required type="text">
-                <label for="date">Date</label>
-                <input id="date" name="date" placeholder="Your date" required type="date">
+                <label for="searchdate">Date</label>
+                <input id="searchdate" name="date" placeholder="Your date" required type="date">
                 <button type="submit">
+                    <i class="fa-solid fa-magnifying-glass"></i>
                     Search
                 </button>
-
             </form>
         </div>
+        <section class="container" id="new-destination">
+
+        </section>
+        <section class="container" id="travel-entries">
+
+        </section>
     </main>
     <footer>
         <p>This app is build by Mehtrick</p>

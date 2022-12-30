@@ -13,7 +13,7 @@ const port = process.env.APP_PORT ? process.env.APP_PORT : 3000;
 
 
 var corsOptions = {
-    origin: "http://localhost:8080",
+    origin: ["http://localhost:8080", "http://192.168.178.23:8080"],
     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 
@@ -27,6 +27,7 @@ app.listen(port, () => {
     console.log(`Travel App listening on port ${port}`);
 });
 
+const destinationDB = [];
 
 app.get("/", function (req, res) {
     res.sendFile(path.resolve("dist/index.html"));
@@ -48,7 +49,18 @@ app.get("/destination/search", async function (req, res) {
     }
     foundDestination.weather = weather;
     foundDestination.image = await searchImageByDestination(foundDestination);
+    foundDestination.date = req.query.date;
     res.send(foundDestination);
+});
 
+app.post("/destination",  function (req, res) {
+    req.body.id = (Math.random() + 1).toString(36);
+    destinationDB.push(req.body);
+    console.log("size of db",destinationDB.length);
+    res.send(req.body);
+});
 
+app.get("/destination", function (req, res) {
+    console.log("info: get destination");
+    res.send(destinationDB);
 });

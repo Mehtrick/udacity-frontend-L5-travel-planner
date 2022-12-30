@@ -6,6 +6,7 @@
 }
 
 .feedback {
+  border-radius: 5px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -19,5 +20,11 @@
 #alert {
   padding: 20px;
   background-color: $error-color;
+  color: white;
+}
+
+#success {
+  padding: 20px;
+  background-color: green;
   color: white;
 }
