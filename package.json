@@ -1,10 +1,10 @@
 {
   "name": "udacity-travel-app",
   "version": "1.0.0",
-  "description": "My travel app",
+  "description": "Loona",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "serve-client": "webpack-dev-server --config webpack.dev.cjs --open ",
     "serve-server": "node src/server/server.js",
     "build-dev": "webpack --config webpack.dev.cjs",
@@ -38,6 +38,7 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-webpack-plugin": "^3.2.0",
     "html-webpack-plugin": "^5.5.0",
+    "jest": "^29.3.1",
     "sass": "^1.57.1",
     "sass-loader": "^13.2.0",
     "style-loader": "^3.3.1",

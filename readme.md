@@ -61,6 +61,9 @@ npm run serve-client
 
 
 ## Testing
+
+[(Back to top)](#table-of-contents)
+
 Tests are found under
 * __tests__/client/
 * __tests__/server/
