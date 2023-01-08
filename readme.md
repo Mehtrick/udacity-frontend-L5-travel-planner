@@ -1,11 +1,14 @@
 # My Travel App - Loona
 
+[![Node.js CI](https://github.com/Mehtrick/udacity-frontend-L5-travel-planner/actions/workflows/node.js.yml/badge.svg)](https://github.com/Mehtrick/udacity-frontend-L5-travel-planner/actions/workflows/node.js.yml)
+
 # Table of contents
 - [Features](#features)
 - [How to run](#how-to-run)
 - [Client development](#client-development)
 - [Dependencies](#dependencies)
 - [License & Copyright](#license--copyright)
+
 
 
 
@@ -27,7 +30,11 @@ Trips are only saved temporarily in the server-cache. If you restart the server 
 
 [(Back to top)](#table-of-contents)
 
-The project is build on node `18.12.1`. You should use at least a node 18 for the app to run correctly
+The project was build on node `18.12.1`. 
+It is also tested on Node 16.x.x and runs fine but does not run on version prior to node 16.
+
+For optimal compability it is recommended to usej `node 18.x.x`
+
 
 Please put a `.env` file in the root of the project containing the following entries:
 
@@ -77,7 +84,7 @@ npm run test
 
 [(Back to top)](#table-of-contents)
 
-* Node 18.12.1
+* Node 18.x.x or 16.x.x
 
 # License & Copyright
 [(Back to top)](#table-of-contents)
