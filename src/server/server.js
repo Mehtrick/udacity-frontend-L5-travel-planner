@@ -9,7 +9,7 @@ import {searchImageByDestination} from "./pixabay.service.js";
 
 dotenv.config();
 const app = express();
-const port = process.env.APP_PORT ? process.env.APP_PORT : 3000;
+const port = process.env.APP_PORT ? process.env.APP_PORT : 8081;
 
 
 var corsOptions = {
