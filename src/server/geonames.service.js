@@ -1,7 +1,8 @@
 import fetch from "node-fetch";
-
+import * as dotenv from "dotenv";
+dotenv.config();
 const geonamesApiUrl = "http://api.geonames.org";
-const geonamesApiKey = "mehtrick";
+const geonamesApiKey = process.env.APP_GEONAMES_API_KEY;
 
 async function searchByName(name) {
     const encodedName = encodeURIComponent(name);

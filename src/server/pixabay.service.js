@@ -21,7 +21,6 @@ async function searchImageByDestination(trip) {
 
 async function searchImageByName(name) {
     const encodedName = encodeURIComponent(name);
-    console.log("search", encodedName);
     return await fetch(`${pixabayApiUrl}?q=${encodedName}&orientation=horizontal&per_page=3&key=${pixabayApiKey}`)
         .then(res => {
             return res.json();

@@ -64,8 +64,8 @@ app.delete("/trip",  function (req, res) {
     const id = req.query.id;
     const elementToDelete = tripDB.find(x => x.id === id);
     const index = tripDB.indexOf(elementToDelete);
-    if (index > -1) { // only splice array when item is found
-        tripDB.splice(index, 1); // 2nd parameter means remove one item only
+    if (index > -1) {
+        tripDB.splice(index, 1);
     }
     res.send();
 });
