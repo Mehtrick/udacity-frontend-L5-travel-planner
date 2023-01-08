@@ -110,6 +110,7 @@ async function deleteTripEntry(id) {
 
 
 export {
+    calculateDaysUntilTrip,
     deleteTripEntry,
     renderTripEntry,
     loadAndRenderAllExistingTrips

@@ -65,8 +65,8 @@ npm run serve-client
 [(Back to top)](#table-of-contents)
 
 Tests are found under
-* __tests__/client/
-* __tests__/server/
+* __tests__/client.spec.js
+* __tests__/server.spec.js
 
 and can be executed by calling
 ```npm

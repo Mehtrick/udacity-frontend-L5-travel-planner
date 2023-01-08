@@ -4,7 +4,7 @@
   "description": "Loona",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest ",
     "serve-client": "webpack-dev-server --config webpack.dev.cjs --open ",
     "serve-server": "node src/server/server.js",
     "build-dev": "webpack --config webpack.dev.cjs",
@@ -32,6 +32,7 @@
     "@babel/core": "^7.20.7",
     "@babel/eslint-parser": "^7.19.1",
     "@babel/preset-env": "^7.20.2",
+    "babel-jest": "^29.3.1",
     "babel-loader": "^9.1.0",
     "css-loader": "^6.7.3",
     "eslint": "^8.30.0",
@@ -47,9 +48,13 @@
     "webpack-dev-server": "^4.11.1",
     "workbox-webpack-plugin": "^6.5.4"
   },
-  "babel": {
-    "presets": [
-      "@babel/preset-env"
+  "jest": {
+    "transform": {
+      "^.+\\.m?js$": "babel-jest"
+    },
+    "transformIgnorePatterns":
+    [
+      "//node_modules"
     ]
   }
 }
