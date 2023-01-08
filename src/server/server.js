@@ -3,7 +3,7 @@ import express from "express";
 import * as dotenv from "dotenv";
 import bodyParser from "body-parser";
 import cors from "cors";
-import {searchByName} from "./geonames.service.js";
+import {searchLocationByName} from "./geonames.service.js";
 import {getWeather} from "./weatherbit.service.js";
 import {searchImageByDestination} from "./pixabay.service.js";
 
@@ -13,8 +13,9 @@ const port = process.env.APP_PORT ? process.env.APP_PORT : 3000;
 
 
 var corsOptions = {
+    //Used for local development
     origin: ["http://localhost:8080", "http://192.168.178.23:8080"],
-    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+    optionsSuccessStatus: 200
 };
 
 app.use(cors(corsOptions));
@@ -27,39 +28,58 @@ app.listen(port, () => {
     console.log(`Travel App listening on port ${port}`);
 });
 
+//Storage for all the trips
 const tripDB = [];
 
 app.get("/", function (req, res) {
     res.sendFile(path.resolve("dist/index.html"));
 });
+
+/**
+ * Used to search a trip. This function collects all the desired data for a trip like the location, weather and an image for it
+ * Expects 2 query params: destination and date.
+ *
+ * The destination is a string containing the name of the desired destination
+ * The date is considered the date of the trip
+ */
 app.get("/trip/search", async function (req, res) {
-    const foundDestination = await searchByName(req.query.destination).then();
-    if (foundDestination.err) {
-        res.statusMessage = foundDestination.err;
-        res.status(foundDestination.status).end();
+    //get the exact location with geo-dates
+    const foundLocation = await searchLocationByName(req.query.destination).then();
+    if (foundLocation.err) {
+        res.statusMessage = foundLocation.err;
+        res.status(foundLocation.status).end();
         return;
     }
-    const weather = await getWeather(foundDestination, req.query.date);
+    //now get the weather of the location at the desired date
+    const weather = await getWeather(foundLocation, req.query.date);
     if (weather.err) {
         res.statusMessage = weather.err;
         res.status(weather.status).end();
         return;
     }
-    foundDestination.weather = weather;
-    foundDestination.image = await searchImageByDestination(foundDestination);
-    foundDestination.date = req.query.date;
-    res.send(foundDestination);
+    foundLocation.weather = weather;
+    //at the end find an image for the location
+    foundLocation.image = await searchImageByDestination(foundLocation);
+    foundLocation.date = req.query.date;
+    res.send(foundLocation);
 });
 
+/**
+ * Saves a trip to the tripDB and assigns an id to the object
+ */
 app.post("/trip",  function (req, res) {
     req.body.id = randomId();
     tripDB.push(req.body);
+    //Sorts the database so that the next trip is the first
     tripDB.sort(function (a,b) {
         return new Date(b.date) - new Date(a.date);
     }).reverse();
     res.send(req.body);
 });
 
+/**
+ * Deletes an trip by its id
+ */
 app.delete("/trip",  function (req, res) {
     const id = req.query.id;
     const elementToDelete = tripDB.find(x => x.id === id);
@@ -74,7 +94,9 @@ function randomId(){
     return Math.random().toString(36).substring(2,10);
 }
 
-
+/**
+ * loads all the trips
+ */
 app.get("/trip", function (req, res) {
     res.send(tripDB);
 });
