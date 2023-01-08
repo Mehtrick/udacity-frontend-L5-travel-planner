@@ -2,7 +2,6 @@ const path = require("path");
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ESLintPlugin = require("eslint-webpack-plugin");
-const WorkboxPlugin = require("workbox-webpack-plugin");
 
 
 module.exports = {
@@ -46,6 +45,5 @@ module.exports = {
             filename: "./index.html",
         }),
         new ESLintPlugin(),
-        new WorkboxPlugin.GenerateSW()
     ],
 };

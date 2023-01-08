@@ -2,7 +2,7 @@
  * This file consist every api call the client can make to the server.
  */
 import {showFeedback} from "./feedback.js";
-const baseURL = "http://192.168.178.23:8081";
+const baseURL = "http://localhost:8081";
 async function getTripEntries() {
     return  await fetch(`${baseURL}/trip`)
         .then(r => {
