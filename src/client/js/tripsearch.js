@@ -1,6 +1,6 @@
 import {activateLoading, deactivateLoading} from "./loading.js";
 import {hideFeedback, showFeedback} from "./feedback.js";
-import {loadAndRenderTripEntries, renderTripEntry} from "./tripentry.js";
+import {loadAndRenderAllExistingTrips, renderTripEntry} from "./tripentry.js";
 import {saveTrip, searchTrip} from "./api.js";
 
 
@@ -23,17 +23,22 @@ function renderTripEntryPreview(trip) {
     renderTripEntry(trip, container, footerContent);
 }
 
-async function searchNewTrip() {
-    event.preventDefault();
+async function searchNewTrip(event) {
     activateLoading();
-    hideFeedback();
-    const destination = document.getElementById("destination").value;
-    const date = document.getElementById("searchdate").value;
-    const newTrip = await searchTrip(destination, date);
-    if (newTrip) {
-        renderTripEntryPreview(newTrip);
+    try{
+        event.preventDefault();
+        hideFeedback();
+        const destination = document.getElementById("destination").value;
+        const date = document.getElementById("searchdate").value;
+        const newTrip = await searchTrip(destination, date);
+        if (newTrip) {
+            renderTripEntryPreview(newTrip);
+        }
+    }finally {
+        deactivateLoading();
     }
-    deactivateLoading();
+
+
 }
 
 function cancelTripSearch() {
@@ -44,11 +49,14 @@ function cancelTripSearch() {
 
 async function saveTripAndReload() {
     activateLoading();
-    await saveTrip(currentTripEntryPreview);
-    showFeedback("success", `${currentTripEntryPreview.name} <br> was added to your upcoming trips`);
-    cancelTripSearch();
-    await loadAndRenderTripEntries();
-    deactivateLoading();
+    try {
+        await saveTrip(currentTripEntryPreview);
+        showFeedback("success", `${currentTripEntryPreview.name} <br> was added to your upcoming trips`);
+        cancelTripSearch();
+        await loadAndRenderAllExistingTrips();
+    } finally {
+        deactivateLoading();
+    }
 }
 
 

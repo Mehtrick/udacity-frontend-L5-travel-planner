@@ -2,17 +2,26 @@ import {activateLoading, deactivateLoading} from "./loading.js";
 import {deleteTravelBookEntry, getTripEntries} from "./api.js";
 import {showFeedback} from "./feedback.js";
 
+
+/**
+ * This functions renders a trip element and appends it to a desired dom element.
+ * The size of this functions comes mainly due to the size of the template string.
+ * @param trip -
+ * @param container - a node where the new trip should be appended to
+ * @param footerContent - optional content which will be rendered to the footer of the card
+ */
 function renderTripEntry(trip, container, footerContent) {
     const daysuntil = calculateDaysUntilTrip(trip.date);
     const vdom = document.createDocumentFragment();
     const tripEntryDiv = document.createElement("div");
 
     tripEntryDiv.classList.add("card");
-    if(!trip.id){
+    if (!trip.id) {
         tripEntryDiv.classList.add("preview");
     }
     tripEntryDiv.classList.add("trip-card");
     tripEntryDiv.id = trip.id ? trip.id : "trip-preview";
+    //the following is the template for the trip-card
     tripEntryDiv.innerHTML = `
             <img alt="${trip.name}" class="card-image"
                  src="${trip.image}">
@@ -65,36 +74,43 @@ function calculateDaysUntilTrip(date) {
     return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 }
 
-async function loadAndRenderTripEntries() {
+async function loadAndRenderAllExistingTrips() {
     activateLoading();
-    const tripEntries = await getTripEntries();
-    const container = document.getElementById("trip-entries");
-    container.innerHTML = "<h3>Your upcoming trips</h3>";
-    for (const tripEntry of tripEntries) {
-        const footerContent = `
+    try {
+        const tripEntries = await getTripEntries();
+        const container = document.getElementById("trip-entries");
+        container.innerHTML = "<h3>Your upcoming trips</h3>";
+        for (const tripEntry of tripEntries) {
+            const footerContent = `
                 <button class="error outlined" onclick="Client.deleteTripEntry('${tripEntry.id}')">
                 <i class="fa-solid fa-trash" ></i>
                     Delete
                 </button>
                 `;
-        renderTripEntry(tripEntry, container, footerContent);
+            renderTripEntry(tripEntry, container, footerContent);
+        }
+    } finally {
+        deactivateLoading();
+        window.scrollTo({top: 0, behavior: "smooth"});
     }
-    deactivateLoading();
-    window.scrollTo({ top: 0, behavior: "smooth" });
+
 }
 
-async function deleteTripEntry(id){
+async function deleteTripEntry(id) {
     activateLoading();
-    await deleteTravelBookEntry(id);
-    await loadAndRenderTripEntries();
-    showFeedback("success", "Trip successfully deleted");
-    deactivateLoading();
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    try {
+        await deleteTravelBookEntry(id);
+        await loadAndRenderAllExistingTrips();
+        showFeedback("success", "Trip successfully deleted");
+    } finally {
+        deactivateLoading();
+        window.scrollTo({top: 0, behavior: "smooth"});
+    }
 }
 
 
 export {
     deleteTripEntry,
     renderTripEntry,
-    loadAndRenderTripEntries
+    loadAndRenderAllExistingTrips
 };

@@ -2,10 +2,10 @@
 
 import * as dotenv from "dotenv";
 import fetch from "node-fetch";
-
+dotenv.config();
 const weatherbitApiURL = "https://api.weatherbit.io/v2.0/";
 const weatherbitApiKey = process.env.APP_WEATHER_API_KEY;
-dotenv.config();
+
 
 /**
  * Get the weather of a destination on a specific date. If the date is within 16 days in the future, it will return the forecast of this date.

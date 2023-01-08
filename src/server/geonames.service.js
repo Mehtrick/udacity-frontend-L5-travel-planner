@@ -1,9 +1,11 @@
 import fetch from "node-fetch";
 import * as dotenv from "dotenv";
+dotenv.config();
 const geonamesApiUrl = "http://api.geonames.org";
+
 const geonamesApiKey = process.env.APP_GEONAMES_API_KEY;
 
-dotenv.config();
+
 
 /**
  * This function searches a location by a name and gets the most relevant result from a list of results.
@@ -15,6 +17,7 @@ async function searchLocationByName(name) {
     return await fetch(`${geonamesApiUrl}/searchJSON?q=${encodedName}&maxRows=1&username=${geonamesApiKey}`)
         .then(res => res.json())
         .then(j => {
+            console.log(geonamesApiKey);
             if (j.geonames.length === 0) {
                 return {
                     err: "Destination not found. Try another.",

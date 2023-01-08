@@ -14,7 +14,7 @@ const port = process.env.APP_PORT ? process.env.APP_PORT : 3000;
 
 var corsOptions = {
     //Used for local development
-    origin: ["http://localhost:8080", "http://192.168.178.23:8080"],
+    origin: ["http://localhost:8080", "http://192.168.178.23:8080","http://localhost:8081"],
     optionsSuccessStatus: 200
 };
 

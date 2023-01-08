@@ -1,4 +1,6 @@
-
+/**
+ * Shows / Hides the loader on the start page
+ */
 
 
 function activateLoading(){
