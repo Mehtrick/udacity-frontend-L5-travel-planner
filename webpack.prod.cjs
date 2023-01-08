@@ -6,7 +6,7 @@ const WorkboxPlugin = require("workbox-webpack-plugin");
 
 
 module.exports = {
-    mode: "development",
+    mode: "production",
     stats: "errors-warnings",
     entry: path.resolve(__dirname, "./src/client/index.js"),
     module: {
