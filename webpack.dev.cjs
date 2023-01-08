@@ -43,6 +43,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: "./src/client/views/index.html",
             filename: "./index.html",
+            favicon: "./src/client/views/favicon.ico"
         }),
         new ESLintPlugin(),
     ],
