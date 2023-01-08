@@ -1,18 +1,15 @@
-// https://www.weatherbit.io/api
-
 import * as dotenv from "dotenv";
 import fetch from "node-fetch";
-
-dotenv.config();
-
 
 const pixabayApiUrl = "https://pixabay.com/api/";
 const pixabayApiKey = process.env.APP_PIXABAY_API_KEY;
 
+dotenv.config();
 
 async function searchImageByDestination(trip) {
     let nameSearchResult = await searchImageByName(trip.name);
-    if(!nameSearchResult){
+    //When no images is found for the name of the trip then search by country
+    if (!nameSearchResult) {
         nameSearchResult = await searchImageByName(trip.country);
     }
     return nameSearchResult.webformatURL;
